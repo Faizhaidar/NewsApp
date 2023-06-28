@@ -36,15 +36,16 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
         navController = view.findNavController()
 
-        LogM.e("==> is articles data "+viewmodel.articles.value.toString())
-
         viewmodel.articles.observe(this, Observer { articles ->
             // Handle the updated list of articles here
             LogM.e("==> is data "+articles.toString())
-            LogM.e("==>observer  is data "+viewmodel.articles.value.toString())
+            LogM.e("==>observer  is data "+viewmodel.allnewsLive.value.toString())
 
         })
-        viewmodel.fetchNews()
+        viewmodel.strDate.observe(this,{
+            LogM.e("==>date"+it.toString())
+            //var date = it.toString()
+        })
     }
 
     fun pickDateTime() {

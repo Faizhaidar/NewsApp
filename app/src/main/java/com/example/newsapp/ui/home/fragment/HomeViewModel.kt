@@ -6,11 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.model.Article
+import com.example.newsapp.data.model.NewsResponse
 import com.example.shopingapp.MyApplication
 import com.example.shopingapp.data.repository.HomeRepository
 import com.example.shopingapp.utils.PrefUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -39,13 +41,22 @@ class HomeViewModel @Inject constructor(
 
     private val dateFormat = SimpleDateFormat("dd-MM-yy")
 
-    fun fetchNews() {
+
+    private val _allnewsLive: MutableLiveData<Response<NewsResponse>> = MutableLiveData<Response<NewsResponse>>()
+    val allnewsLive: LiveData<Response<NewsResponse>>
+        get() = _allnewsLive
+
+   /* fun fetchNews() {
         viewModelScope.launch(Dispatchers.IO) {
             val news = repository.getNews()
             _articles.postValue(news)
         }
-    }
+    }*/
 
+    suspend fun newsDetails() {
+        val response = repository.callNewsDetails(_strDate.value.toString())
+            _allnewsLive.value = response
+    }
     fun setSelectedDate(strDate: String) {
         _strDate.postValue(strDate)
         _mDateForDisplay.postValue(strDate)

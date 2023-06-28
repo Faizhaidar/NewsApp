@@ -1,9 +1,11 @@
 package com.example.shopingapp.data.repository
 
 import com.example.newsapp.data.model.Article
+import com.example.newsapp.data.model.NewsResponse
 import com.example.shopingapp.api.SafeAPIRequest
 import com.example.shopingapp.api.WebServiceInterface
 import okhttp3.OkHttpClient
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -12,8 +14,7 @@ import javax.inject.Inject
 class HomeRepository@Inject constructor(
     private var webServiceInterface: WebServiceInterface
 ) : SafeAPIRequest() {
-
-    init {
+    /*init {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://newsapi.org/v2/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -25,5 +26,9 @@ class HomeRepository@Inject constructor(
     suspend fun getNews(): List<Article> {
         val response = webServiceInterface.getNews("IT", "2023-05-27", "publishedAt", "a6dcb214eb204e61ab5cea48eefcc62d")
         return response.articles
+    }*/
+
+    suspend fun callNewsDetails(date: String): Response<NewsResponse> {
+        return webServiceInterface.callNewsDetails("IT",date,"publishedAt", "a6dcb214eb204e61ab5cea48eefcc62d")
     }
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewmodel"
+            type="com.example.shopingapp.ui.home.fragment.HomeViewModel" />
+        <variable
+            name="listner"
+            type="com.example.shopingapp.ui.home.fragment.HomeFragment" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/relativ_of_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:onClick="@{() -> listner.pickDateTime()}">
+
+                <TextView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@drawable/ic_calendar_color" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/bg_button"
+                    android:text="@{viewmodel.mDateForDisplay}"
+                    tools:text="10/10/2023"/>
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:text="@string/search"
+                android:textSize="@dimen/_15ssp"
+                android:textColor="@color/white"
+                android:onClick="@{() -> viewmodel.fetchNews()}"/>
+
+
+
+        </RelativeLayout>
+
+        <View
+            android:id="@id/top_view"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@color/grey"
+            android:layout_below="@+id/relativ_of_date"
+            android:layout_marginTop="@dimen/_3sdp"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/top_view"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/adapter_main_category" />
+        <!--bindNewsList="@{viewmodel.articles}"
+            homeListner="@{listner}"-->
+    </RelativeLayout>
+
+</layout>

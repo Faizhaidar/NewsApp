@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="home">Home</string>
+    <string name="login">Login</string>
+    <string name="enter_user_name">Enter username</string>
+    <string name="enter_password">Enter password</string>
+    <string name="date">Date</string>
+    <string name="search">Search</string>
+</resources>
